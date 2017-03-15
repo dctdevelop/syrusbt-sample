@@ -16,6 +16,3 @@ Otherwise if you use an ios System like ihpone or ipad you will need to install 
 3. cordova plugins add cordova-plugin-ble-central --save
 3. cordova platforms add android|ios
 4. cordova run android | ios
-
-
-
