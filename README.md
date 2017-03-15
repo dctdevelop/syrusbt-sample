@@ -16,3 +16,9 @@ Otherwise if you use an ios System like ihpone or ipad you will need to install 
 3. cordova plugins add cordova-plugin-ble-central --save
 3. cordova platforms add android|ios
 4. cordova run android | ios
+
+## Useful Documentation
+#### [Cordova Getting Started](https://cordova.apache.org/#getstarted)
+#### [Cordova plugin BLE](https://github.com/don/cordova-plugin-ble-central)
+#### [Cordova Android Platform Guide](https://cordova.apache.org/docs/en/latest/guide/platforms/android/index.html)
+#### [Cordova Ios Platform Guide](https://cordova.apache.org/docs/en/latest/guide/platforms/ios/index.html)

@@ -45,7 +45,7 @@ var app = {
 
             function(data){
                 $("#list-syrus").toggle('fast');
-                $("#btn-discon").toggle('fast');
+                $("#commands").toggle('fast');
                 // $("#dialog-1").show();
                 // $(".hider").click(function(){$("#dialog-1").hide();});
                 console.log(data);
@@ -88,6 +88,25 @@ var app = {
             function(r){console.log(r)}, function(r){r});
     }
 
+    function sendOnOutput1(){
+        var data = stringToBytes(">SSSXP11<");
+        // send data to syrus without response
+        ble.writeWithoutResponse(app.device.id,
+            "00000000-dc70-0080-dc70-a07ba85ee4d6",
+            "00000000-dc70-0180-dc70-a07ba85ee4d6",
+            data,
+            function(r){console.log(r)}, function(r){r}); 
+    }
+    function sendOffOutput1(){
+        var data = stringToBytes(">SSSXP10<");
+        // send data to syrus without response
+        ble.writeWithoutResponse(app.device.id,
+            "00000000-dc70-0080-dc70-a07ba85ee4d6",
+            "00000000-dc70-0180-dc70-a07ba85ee4d6",
+            data,
+            function(r){console.log(r)}, function(r){r}); 
+    }
+
 
     function listenDataSyrus(){
         ble.startNotification(app.device.id,
@@ -100,7 +119,7 @@ var app = {
     {
         var command = bytesToString(data);
         console.log(command) // show th command in console
-        if  (command.indexOf("RPV")){
+        if  (command.indexOf("RPV") > -1){
             var data = parse_PV_info(command);
             console.log(data);
             if (app.marker == null) {
@@ -132,7 +151,7 @@ var app = {
         ble.disconnect(app.device.id, function(){
             console.log("Disconnected");
             app.receivedEvent();
-            $("#btn-discon").toggle('fast');
+            $("#commands").toggle('fast');
             $("#list-syrus").toggle('fast');
             $("#list-syrus").html("");
         },  function(){
