@@ -7,16 +7,16 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
-        },
         "cordova-plugin-ble-central": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
+            "PACKAGE_NAME": "io.dctdevlop.hellosyrus"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "io.dctdevlop.hellosyrus"
         }
     },
     "dependent_plugins": {
         "cordova-plugin-compat": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
+            "PACKAGE_NAME": "io.dctdevlop.hellosyrus"
         }
     }
 }

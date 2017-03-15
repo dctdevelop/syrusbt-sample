@@ -24,7 +24,7 @@ var app = {
     receivedEvent: function(id) {
         ble.startScan([],function(device){
             console.log(device);
-            if(device.name !== undefined && device.name.indexOf("SYRUS 3GBT")){
+            if(device.name != undefined && device.name.indexOf("Syrus 3GBT") > -1){
                 var element_id = device.name.substring(11);
                 $("#list-syrus").append('<ons-list-item tappable id="'+ element_id +'">' + device.name  + '</ons-list-item>')
                 $("#"+ element_id).click(function(){
@@ -45,6 +45,7 @@ var app = {
 
             function(data){
                 $("#list-syrus").toggle('fast');
+                $("#btn-discon").toggle('fast');
                 // $("#dialog-1").show();
                 // $(".hider").click(function(){$("#dialog-1").hide();});
                 console.log(data);
@@ -99,28 +100,44 @@ var app = {
     {
         var command = bytesToString(data);
         console.log(command) // show th command in console
-        var data = parse_PV_info(command);
-        console.log(data);
-        if (app.marker == null) {
-            app.map = new google.maps.Map(document.getElementById('map'), {
-              center: new google.maps.LatLng(data.latitude, data.longitude),
-              scrollwheel: false,
-              zoom: 16
-            });
-              app.marker = new google.maps.Marker({
-                position: new google.maps.LatLng(data.latitude, data.longitude),
-                map: app.map,
-                title: 'Hello World!'
-              });
-        }
-        else{
-            app.map.setCenter(new google.maps.LatLng(data.latitude, data.longitude));
-            app.marker.setPosition(new google.maps.LatLng(data.latitude, data.longitude));
+        if  (command.indexOf("RPV")){
+            var data = parse_PV_info(command);
+            console.log(data);
+            if (app.marker == null) {
+                app.map = new google.maps.Map(document.getElementById('map'), {
+                center: new google.maps.LatLng(data.latitude, data.longitude),
+                scrollwheel: false,
+                zoom: 16
+                });
+                app.marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(data.latitude, data.longitude),
+                    map: app.map,
+                    title: 'Hello World!'
+                });
+            }
+            else{
+                app.map.setCenter(new google.maps.LatLng(data.latitude, data.longitude));
+                app.marker.setPosition(new google.maps.LatLng(data.latitude, data.longitude));
+            }
+
+            $(".latitude").html("<b>Latitude:</b>"+ data.latitude);
+            $(".longitude").html("<b>Latitude:</b>"+ data.longitude);
+            $(".imei").html("<b>IMEI:</b>"+ data.imei);
+
         }
 
-        $(".latitude").html("<b>Latitude:</b>"+ data.latitude);
-        $(".longitude").html("<b>Latitude:</b>"+ data.longitude);
-        $(".imei").html("<b>IMEI:</b>"+ data.imei);
+    }
+
+    function disconnectSyrus(){
+        ble.disconnect(app.device.id, function(){
+            console.log("Disconnected");
+            app.receivedEvent();
+            $("#btn-discon").toggle('fast');
+            $("#list-syrus").toggle('fast');
+            $("#list-syrus").html("");
+        },  function(){
+            console.error("ERROR");
+        });
     }
 
 
