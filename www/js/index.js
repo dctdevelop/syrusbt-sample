@@ -31,7 +31,7 @@ var app = {
                     connectSyrus(device);
                 });
             }
-        
+
 
         },function(error){
             console.error(error);
@@ -71,8 +71,8 @@ var app = {
         var data = stringToBytes(">SBIK"+ code + "<");
         ble.writeWithoutResponse(app.device.id,
             "00000000-dc70-0080-dc70-a07ba85ee4d6",
-            "00000000-dc70-0180-dc70-a07ba85ee4d6", 
-            data, 
+            "00000000-dc70-0180-dc70-a07ba85ee4d6",
+            data,
             function(r){console.log(r)}, function(r){r});
     }
 
@@ -82,8 +82,8 @@ var app = {
         // send data to syrus without response
         ble.writeWithoutResponse(app.device.id,
             "00000000-dc70-0080-dc70-a07ba85ee4d6",
-            "00000000-dc70-0180-dc70-a07ba85ee4d6", 
-            data, 
+            "00000000-dc70-0180-dc70-a07ba85ee4d6",
+            data,
             function(r){console.log(r)}, function(r){r});
     }
 
@@ -91,7 +91,7 @@ var app = {
     function listenDataSyrus(){
         ble.startNotification(app.device.id,
             "00000000-dc70-0080-dc70-a07ba85ee4d6",
-            "00000000-dc70-0180-dc70-a07ba85ee4d6", 
+            "00000000-dc70-0180-dc70-a07ba85ee4d6",
             function(data){datareceived(data)}, function(err){console.warn(err)});
     }
 
@@ -134,7 +134,7 @@ var app = {
 
     function bytesToString(buffer) {
         return String.fromCharCode.apply(null, new Uint8Array(buffer));
-    } 
+    }
 
 
 
