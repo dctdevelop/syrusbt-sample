@@ -1,4 +1,4 @@
-# Syrus Bluetooth Communication Example
+# Syrus Bluetooth Communication Example Using Cordova
 
 ## Requisites
 An Android or iOS device with Bluetooth 4.1
